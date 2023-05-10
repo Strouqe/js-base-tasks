@@ -176,14 +176,19 @@ function numToText(num) {
             }
         }
     }
-    if (numArray[numArray.length - 1] !== "0" && numArray[numArray.length - 2] !== "0") {
-        dash = numArray[numArray.length - 2] !== '1' ? "-" : "";
+    if (numArray[numArray.length - 1] !== "0" &&
+        numArray[numArray.length - 2] !== "0") {
+        dash = numArray[numArray.length - 2] !== "1" ? "-" : "";
     }
     if (numArray.length === 3) {
         if (numArray[1] === "0" && numArray[2] === "0") {
             return hundreds;
         }
-        return hundreds + " and " + tens.toLocaleLowerCase() + dash + didgits.toLocaleLowerCase();
+        return (hundreds +
+            " and " +
+            tens.toLocaleLowerCase() +
+            dash +
+            didgits.toLocaleLowerCase());
     }
     else if (numArray.length === 2) {
         return tens + dash + didgits.toLocaleLowerCase();
@@ -205,3 +210,151 @@ console.log("test", numToText(100));
 console.log("test", numToText(9));
 console.log("test", numToText(55));
 console.log("test", numToText(11));
+///3
+var Functions3 = /** @class */ (function () {
+    function Functions3() {
+        console.log("textToNum 0", this.textToNum("Zero"));
+        console.log("textToNum 235", this.textToNum("Two hundred and thirty-five"));
+        console.log("textToNum 315", this.textToNum("Three hundred and fifteen"));
+        console.log("textToNum 310", this.textToNum("Three hundred and ten"));
+        console.log("textToNum 930", this.textToNum("Nine hundred and thirty"));
+        console.log("textToNum 505", this.textToNum("Five hundred and five"));
+        console.log("textToNum 100", this.textToNum("One hundred"));
+        console.log("textToNum 9", this.textToNum("Nine"));
+        console.log("textToNum 55", this.textToNum("Fifty-five"));
+        console.log("textToNum 11", this.textToNum("Eleven"));
+    }
+    Functions3.prototype.hundreds = function (input) {
+        switch (input.toLowerCase()) {
+            case "one":
+                return 100;
+            case "two":
+                return 200;
+            case "three":
+                return 300;
+            case "four":
+                return 400;
+            case "five":
+                return 500;
+            case "six":
+                return 600;
+            case "seven":
+                return 700;
+            case "eight":
+                return 800;
+            case "nine":
+                return 900;
+            default:
+                return 0;
+        }
+    };
+    Functions3.prototype.tens = function (input) {
+        switch (input.toLowerCase()) {
+            case "twenty":
+                return 20;
+            case "thirty":
+                return 30;
+            case "fourty":
+                return 40;
+            case "fifty":
+                return 50;
+            case "sixty":
+                return 60;
+            case "seventy":
+                return 70;
+            case "eightty":
+                return 80;
+            case "ninety":
+                return 90;
+            default:
+                return 0;
+        }
+    };
+    Functions3.prototype.didgits = function (input) {
+        switch (input.toLowerCase()) {
+            case "one":
+                return 1;
+            case "two":
+                return 2;
+            case "three":
+                return 3;
+            case "four":
+                return 4;
+            case "five":
+                return 5;
+            case "six":
+                return 6;
+            case "seven":
+                return 7;
+            case "eight":
+                return 8;
+            case "nine":
+                return 9;
+            case "ten":
+                return 10;
+            case "eleven":
+                return 11;
+            case "twelve":
+                return 12;
+            case "thirteen":
+                return 13;
+            case "fourteen":
+                return 14;
+            case "fifteen":
+                return 15;
+            case "sixteen":
+                return 16;
+            case "seventeen":
+                return 17;
+            case "eighteen":
+                return 18;
+            case "nineteen":
+                return 19;
+            default:
+                return 0;
+        }
+    };
+    Functions3.prototype.textToNum = function (inputString) {
+        var stringArray = inputString.split(" ");
+        var tensString = stringArray[stringArray.length - 1].split("-");
+        if (stringArray.length === 1 && tensString.length === 1) {
+            return this.didgits(stringArray[0]);
+        }
+        else {
+            return (this.hundreds(stringArray[0]) +
+                this.tens(tensString[0]) +
+                this.didgits(tensString[tensString.length - 1]));
+        }
+    };
+    return Functions3;
+}());
+var test = new Functions3();
+///4
+var Functions4 = /** @class */ (function () {
+    function Functions4() {
+        console.log("countDistance", this.countDistance([[5, 1], [1, 1]]));
+        console.log("countDistance", this.countDistance([[5, 1], [-1, -1]]));
+        console.log("countDistance", this.countDistance([[-5, 1], [-1, 1]]));
+        console.log("countDistance", this.countDistance([[-5, 1], [1, 1]]));
+        console.log("countDistance", this.countDistance([[5, -1], [1, 1]]));
+        console.log("countDistance", this.countDistance([[5, -1], [1, -1]]));
+        console.log("countDistance", this.countDistance([[-5, -1], [-1, -1]]));
+    }
+    Functions4.prototype.singleAxisDistance = function (a, b) {
+        return Math.abs(a - b);
+    };
+    Functions4.prototype.countDistance = function (_a) {
+        var _b = _a[0], x = _b[0], y = _b[1], _c = _a[1], a = _c[0], b = _c[1];
+        var sum = 0;
+        if (x - a === 0 || y - b === 0) {
+            sum = this.singleAxisDistance(x, a) + this.singleAxisDistance(y, b);
+        }
+        else {
+            sum = Math.sqrt(Math.pow(this.singleAxisDistance(x, a), 2) +
+                Math.pow(this.singleAxisDistance(y, b), 2));
+        }
+        return sum;
+    };
+    return Functions4;
+}());
+var test4 = new Functions4();
