@@ -25,7 +25,7 @@ console.log("Day of week", dayOfWeek(3));
 console.log("Day of week", dayOfWeek(7));
 console.log("Day of week", dayOfWeek(8));
 ///2
-function numToText(num) {
+function numToText1(num) {
     var numArray = num.toString().split("");
     var hundreds = "";
     var tens = "";
@@ -200,16 +200,16 @@ function numToText(num) {
         return "Enter a number from 0 to 999";
     }
 }
-console.log("test", numToText(0));
-console.log("test", numToText(235));
-console.log("test", numToText(315));
-console.log("test", numToText(310));
-console.log("test", numToText(930));
-console.log("test", numToText(505));
-console.log("test", numToText(100));
-console.log("test", numToText(9));
-console.log("test", numToText(55));
-console.log("test", numToText(11));
+console.log("test", numToText1(0));
+console.log("test", numToText1(235));
+console.log("test", numToText1(315));
+console.log("test", numToText1(310));
+console.log("test", numToText1(930));
+console.log("test", numToText1(505));
+console.log("test", numToText1(100));
+console.log("test", numToText1(9));
+console.log("test", numToText1(55));
+console.log("test", numToText1(11));
 ///3
 var Functions3 = /** @class */ (function () {
     function Functions3() {
@@ -332,13 +332,34 @@ var test = new Functions3();
 ///4
 var Functions4 = /** @class */ (function () {
     function Functions4() {
-        console.log("countDistance", this.countDistance([[5, 1], [1, 1]]));
-        console.log("countDistance", this.countDistance([[5, 1], [-1, -1]]));
-        console.log("countDistance", this.countDistance([[-5, 1], [-1, 1]]));
-        console.log("countDistance", this.countDistance([[-5, 1], [1, 1]]));
-        console.log("countDistance", this.countDistance([[5, -1], [1, 1]]));
-        console.log("countDistance", this.countDistance([[5, -1], [1, -1]]));
-        console.log("countDistance", this.countDistance([[-5, -1], [-1, -1]]));
+        console.log("countDistance", this.countDistance([
+            [5, 1],
+            [1, 1],
+        ]));
+        console.log("countDistance", this.countDistance([
+            [5, 1],
+            [-1, -1],
+        ]));
+        console.log("countDistance", this.countDistance([
+            [-5, 1],
+            [-1, 1],
+        ]));
+        console.log("countDistance", this.countDistance([
+            [-5, 1],
+            [1, 1],
+        ]));
+        console.log("countDistance", this.countDistance([
+            [5, -1],
+            [1, 1],
+        ]));
+        console.log("countDistance", this.countDistance([
+            [5, -1],
+            [1, -1],
+        ]));
+        console.log("countDistance", this.countDistance([
+            [-5, -1],
+            [-1, -1],
+        ]));
     }
     Functions4.prototype.singleAxisDistance = function (a, b) {
         return Math.abs(a - b);
@@ -358,3 +379,265 @@ var Functions4 = /** @class */ (function () {
     return Functions4;
 }());
 var test4 = new Functions4();
+///5
+var ConvertNum = /** @class */ (function () {
+    function ConvertNum() {
+        // console.log("numToText 0", this.numToText(0));
+        // console.log("numToText 235", this.numToText(235));
+        // console.log("numToText 315", this.numToText(315));
+        // console.log("numToText 310", this.numToText(310));
+        // console.log("numToText 930", this.numToText(930));
+        // console.log("numToText 505", this.numToText(505));
+        // console.log("numToText 100", this.numToText(100));
+        // console.log("numToText 9", this.numToText(9));
+        // console.log("numToText 55", this.numToText(55));
+        // console.log("numToText 11", this.numToText(11));
+        // console.log("numToText 11", this.numToText(11));
+        console.log("thousands 0", this.thousands(0));
+        console.log("thousands 11", this.thousands(11));
+        console.log("thousands 35", this.thousands(35));
+        console.log("thousands 315", this.thousands(315));
+        console.log("thousands 234", this.thousands(234));
+        console.log("thousands 1,234", this.thousands(1234));
+        console.log("thousands 7,873", this.thousands(7873));
+        console.log("thousands 247,812", this.thousands(247812));
+        console.log("thousands 967,873", this.thousands(967873));
+        console.log("thousands 100,000", this.thousands(100000));
+        console.log("millions 1,000,000", this.millions(1000000));
+        console.log("millions 1,234,567", this.millions(1234567));
+        console.log("millions 12,000,678", this.millions(12000678));
+        console.log("millions 12,045,678", this.millions(12045678));
+        console.log("millions 12,345,678", this.millions(12345678));
+        console.log("millions 123,456,789", this.millions(123456789));
+        console.log("billions 1,000,000,000", this.billions(1000000000));
+        console.log("billions 1,234,567,890", this.billions(1234567890));
+        console.log("billions 12,000,678,901", this.billions(12000678901));
+        console.log("billions 12,045,678,901", this.billions(12045678901));
+        console.log("billions 986,045,678,901", this.billions(986045678901));
+    }
+    ConvertNum.prototype.hundreds = function (array) {
+        switch (array[array.length - 3]) {
+            case "1":
+                return "One hundred";
+            case "2":
+                return "Two hundred";
+            case "3":
+                return "Three hundred";
+            case "4":
+                return "Four hundred";
+            case "5":
+                return "Five hundred";
+            case "6":
+                return "Six hundred";
+            case "7":
+                return "Seven hundred";
+            case "8":
+                return "Eight hundred";
+            case "9":
+                return "Nine hundred";
+            default:
+                return "";
+        }
+    };
+    ConvertNum.prototype.tens = function (array) {
+        switch (array[array.length - 2]) {
+            case "1":
+                switch (array[array.length - 1]) {
+                    case "0":
+                        return "Ten";
+                    case "1":
+                        return "Eleven";
+                    case "2":
+                        return "Twelve";
+                    case "3":
+                        return "Thirteen";
+                    case "4":
+                        return "Fourteen";
+                    case "5":
+                        return "Fifteen";
+                    case "6":
+                        return "Sixteen";
+                    case "7":
+                        return "Seventeen";
+                    case "8":
+                        return "Eighteen";
+                    case "9":
+                        return "Nineteen";
+                    case "2":
+                        return "Twenty";
+                    case "3":
+                        return "Thirty";
+                    case "4":
+                        return "Fourty";
+                    case "5":
+                        return "Fifty";
+                    case "6":
+                        return "Sixty";
+                    case "7":
+                        return "Seventy";
+                    case "8":
+                        return "Eightty";
+                    case "9":
+                        return "Ninety";
+                    default:
+                        return "";
+                }
+            case "2":
+                return "Twenty";
+            case "3":
+                return "Thirty";
+            case "4":
+                return "Fourty";
+            case "5":
+                return "Fifty";
+            case "6":
+                return "Sixty";
+            case "7":
+                return "Seventy";
+            case "8":
+                return "Eightty";
+            case "9":
+                return "Ninety";
+            default:
+                return "";
+        }
+    };
+    ConvertNum.prototype.didgits = function (array) {
+        if (array[array.length - 2] === "1")
+            return "";
+        switch (array[array.length - 1]) {
+            case "1":
+                return "One";
+            case "2":
+                return "Two";
+            case "3":
+                return "Three";
+            case "4":
+                return "Four";
+            case "5":
+                return "Five";
+            case "6":
+                return "Six";
+            case "7":
+                return "Seven";
+            case "8":
+                return "Eight";
+            case "9":
+                return "Nine";
+            default:
+                return "";
+        }
+    };
+    ConvertNum.prototype.thousands = function (num) {
+        var numArray = num.toString().split("");
+        var hundredssArray = numArray.slice(numArray.length - 3, numArray.length);
+        var thousandsArray = numArray.slice(0, numArray.length - 3);
+        // console.log("hundredssArray", hundredssArray);
+        // if (numArray[0] === "0") {
+        //   return "Zero";
+        // } else
+        if (numArray.length < 4) {
+            return this.numToText(num);
+        }
+        else if (!hundredssArray.some(function (num) { return num !== "0"; })
+        // hundredssArray[hundredssArray.length - 3] === "0" &&
+        // hundredssArray[hundredssArray.length - 2] === "0" &&
+        // hundredssArray[hundredssArray.length - 1] === "0"
+        ) {
+            return this.numToText(parseInt(thousandsArray.join(""))) + " thousand";
+        }
+        return (this.numToText(parseInt(thousandsArray.join(""))) +
+            " thousand " +
+            this.numToText(parseInt(hundredssArray.join(""))));
+    };
+    ConvertNum.prototype.millions = function (num) {
+        var numArray = num.toString().split("");
+        var thousandssArray = numArray.slice(numArray.length - 6, numArray.length);
+        var millionsArray = numArray.slice(0, numArray.length - 6);
+        // console.log("thousandssArray", thousandssArray);
+        // console.log('millionsArray', millionsArray)
+        // if (millionsArray[0] === "0") {
+        //   return "Zero";
+        // } else 
+        if (numArray.length < 7) {
+            return this.thousands(num);
+        }
+        else if (!thousandssArray.some(function (num) { return num !== "0"; })
+        // thousandssArray[thousandssArray.length - 6] === "0" &&
+        // thousandssArray[thousandssArray.length - 5] === "0" &&
+        // thousandssArray[thousandssArray.length - 4] === "0" &&
+        // thousandssArray[thousandssArray.length - 3] === "0" &&
+        // thousandssArray[thousandssArray.length - 2] === "0" &&
+        // thousandssArray[thousandssArray.length - 1] === "0"
+        ) {
+            return this.numToText(parseInt(millionsArray.join(""))) + " million";
+        }
+        else {
+            return (this.numToText(parseInt(millionsArray.join(""))) +
+                " million " +
+                this.thousands(parseInt(thousandssArray.join(""))));
+        }
+        ;
+    };
+    ;
+    ConvertNum.prototype.billions = function (num) {
+        var numArray = num.toString().split("");
+        var millionssArray = numArray.slice(numArray.length - 9, numArray.length);
+        var billionsArray = numArray.slice(0, numArray.length - 9);
+        // console.log("millionssArray", millionssArray);
+        // console.log('billionsArray', billionsArray)
+        if (numArray[0] === "0") {
+            return "Zero";
+        }
+        else if (numArray.length < 10) {
+            return this.millions(num);
+        }
+        else if (!millionssArray.some(function (num) { return num !== "0"; })
+        // millionssArray[millionssArray.length - 9] === "0" &&
+        // millionssArray[millionssArray.length - 8] === "0" &&
+        // millionssArray[millionssArray.length - 7] === "0" &&
+        // millionssArray[millionssArray.length - 6] === "0" &&
+        // millionssArray[millionssArray.length - 5] === "0" &&
+        // millionssArray[millionssArray.length - 4] === "0" &&
+        // millionssArray[millionssArray.length - 3] === "0" &&
+        // millionssArray[millionssArray.length - 2] === "0" &&
+        // millionssArray[millionssArray.length - 1] === "0"
+        ) {
+            return this.numToText(parseInt(billionsArray.join(""))) + " billion";
+        }
+        else {
+            return (this.numToText(parseInt(billionsArray.join(""))) +
+                " billion " +
+                this.millions(parseInt(millionssArray.join(""))));
+        }
+        ;
+    };
+    ;
+    ConvertNum.prototype.numToText = function (num) {
+        var numArray = num.toString().split("");
+        var hundreds = this.hundreds(numArray);
+        var tens = this.tens(numArray);
+        var didgits = this.didgits(numArray);
+        var dash = "";
+        if (numArray[numArray.length - 1] !== "0" &&
+            numArray[numArray.length - 2] !== "0") {
+            dash = numArray[numArray.length - 2] !== "1" ? "-" : "";
+        }
+        if (numArray.length === 3) {
+            if (numArray[1] === "0" && numArray[2] === "0") {
+                return hundreds;
+            }
+            return (hundreds +
+                " and " +
+                tens.toLocaleLowerCase() +
+                dash +
+                didgits.toLocaleLowerCase());
+        }
+        else if (numArray.length === 2) {
+            return tens + dash + didgits.toLocaleLowerCase();
+        }
+        return didgits;
+    };
+    return ConvertNum;
+}());
+var test5 = new ConvertNum();
