@@ -419,17 +419,6 @@ const test4 = new Functions4();
 
 class ConvertNum {
   constructor() {
-    // console.log("numToText 0", this.numToText(0));
-    // console.log("numToText 235", this.numToText(235));
-    // console.log("numToText 315", this.numToText(315));
-    // console.log("numToText 310", this.numToText(310));
-    // console.log("numToText 930", this.numToText(930));
-    // console.log("numToText 505", this.numToText(505));
-    // console.log("numToText 100", this.numToText(100));
-    // console.log("numToText 9", this.numToText(9));
-    // console.log("numToText 55", this.numToText(55));
-    // console.log("numToText 11", this.numToText(11));
-    // console.log("numToText 11", this.numToText(11));
     console.log("thousands 0", this.thousands(0));
     console.log("thousands 11", this.thousands(11));
     console.log("thousands 35", this.thousands(35));
@@ -452,7 +441,7 @@ class ConvertNum {
     console.log("billions 12,045,678,901", this.billions(12045678901));
     console.log("billions 986,045,678,901", this.billions(986045678901));
     console.log("billions 900,000,000,000", this.billions(900000000000));
-  }
+  };
 
   hundreds(array: string[]): string {
     switch (array[array.length - 3]) {
@@ -476,8 +465,8 @@ class ConvertNum {
         return "Nine hundred";
       default:
         return "";
-    }
-  }
+    };
+  };
 
   tens(array: string[]): string {
     switch (array[array.length - 2]) {
@@ -521,7 +510,7 @@ class ConvertNum {
             return "Ninety";
           default:
             return "";
-        }
+        };
       case "2":
         return "Twenty";
       case "3":
@@ -540,10 +529,10 @@ class ConvertNum {
         return "Ninety";
       default:
         return "";
-    }
-  }
+    };
+  };
 
-  didgits(array: string[]) {
+  didgits(array: string[]): string {
     if (array[array.length - 2] === "1") return "";
     switch (array[array.length - 1]) {
       case "1":
@@ -566,8 +555,8 @@ class ConvertNum {
         return "Nine";
       default:
         return "";
-    }
-  }
+    };
+  };
 
   numToText(num: number): string {
     let numArray = num.toString().split("");
@@ -581,12 +570,12 @@ class ConvertNum {
       numArray[numArray.length - 2] !== "0"
     ) {
       dash = numArray[numArray.length - 2] !== "1" ? "-" : "";
-    }
+    };
 
     if (numArray.length === 3) {
       if (numArray[1] === "0" && numArray[2] === "0") {
         return hundreds;
-      }
+      };
       return (
         hundreds +
         " and " +
@@ -596,7 +585,7 @@ class ConvertNum {
       );
     } else if (numArray.length === 2) {
       return tens + dash + didgits.toLocaleLowerCase();
-    }
+    };
     return didgits;
   }
 
@@ -608,13 +597,13 @@ class ConvertNum {
       return this.numToText(num);
     } else if (!hundredssArray.some((num) => num !== "0")) {
       return this.numToText(parseInt(thousandsArray.join(""))) + " thousand";
-    }
+    };
     return (
       this.numToText(parseInt(thousandsArray.join(""))) +
       " thousand " +
       this.numToText(parseInt(hundredssArray.join("")))
     );
-  }
+  };
 
   millions(num: number): string {
     let numArray = num.toString().split("");
@@ -630,8 +619,8 @@ class ConvertNum {
         " million " +
         this.thousands(parseInt(thousandssArray.join("")))
       );
-    }
-  }
+    };
+  };
 
   billions(num: number): string {
     let numArray = num.toString().split("");
@@ -649,9 +638,9 @@ class ConvertNum {
         " billion " +
         this.millions(parseInt(millionssArray.join("")))
       );
-    }
-  }
-}
+    };
+  };
+};
 
 const test5 = new ConvertNum();
 
