@@ -218,16 +218,16 @@ console.log("test", numToText1(11));
 class Functions3 {
   inputString: string;
   constructor() {
-    console.log("textToNum 0", this.textToNum("Zero"));
-    console.log("textToNum 235", this.textToNum("Two hundred and thirty-five"));
-    console.log("textToNum 315", this.textToNum("Three hundred and fifteen"));
-    console.log("textToNum 310", this.textToNum("Three hundred and ten"));
-    console.log("textToNum 930", this.textToNum("Nine hundred and thirty"));
-    console.log("textToNum 505", this.textToNum("Five hundred and five"));
-    console.log("textToNum 100", this.textToNum("One hundred"));
-    console.log("textToNum 9", this.textToNum("Nine"));
-    console.log("textToNum 55", this.textToNum("Fifty-five"));
-    console.log("textToNum 11", this.textToNum("Eleven"));
+    // console.log("textToNum 0", this.textToNum("Zero"));
+    // console.log("textToNum 235", this.textToNum("Two hundred and thirty-five"));
+    // console.log("textToNum 315", this.textToNum("Three hundred and fifteen"));
+    // console.log("textToNum 310", this.textToNum("Three hundred and ten"));
+    // console.log("textToNum 930", this.textToNum("Nine hundred and thirty"));
+    // console.log("textToNum 505", this.textToNum("Five hundred and five"));
+    // console.log("textToNum 100", this.textToNum("One hundred"));
+    // console.log("textToNum 9", this.textToNum("Nine"));
+    // console.log("textToNum 55", this.textToNum("Fifty-five"));
+    // console.log("textToNum 11", this.textToNum("Eleven"));
   }
 
   hundreds(input: string): number {
@@ -451,6 +451,7 @@ class ConvertNum {
     console.log("billions 12,000,678,901", this.billions(12000678901));
     console.log("billions 12,045,678,901", this.billions(12045678901));
     console.log("billions 986,045,678,901", this.billions(986045678901));
+    console.log("billions 900,000,000,000", this.billions(900000000000));
   }
 
   hundreds(array: string[]): string {
@@ -567,93 +568,6 @@ class ConvertNum {
         return "";
     }
   }
-  thousands(num: number) {
-    let numArray = num.toString().split("");
-    let hundredssArray = numArray.slice(numArray.length - 3, numArray.length);
-    let thousandsArray = numArray.slice(0, numArray.length - 3);
-    // console.log("hundredssArray", hundredssArray);
-    // if (numArray[0] === "0") {
-    //   return "Zero";
-    // } else
-     if (numArray.length < 4) {
-      return this.numToText(num);
-    } else if (
-      !hundredssArray.some((num) => num !== "0")
-      // hundredssArray[hundredssArray.length - 3] === "0" &&
-      // hundredssArray[hundredssArray.length - 2] === "0" &&
-      // hundredssArray[hundredssArray.length - 1] === "0"
-    ) {
-      return this.numToText(parseInt(thousandsArray.join(""))) + " thousand";
-    }
-
-    return (
-      this.numToText(parseInt(thousandsArray.join(""))) +
-      " thousand " +
-      this.numToText(parseInt(hundredssArray.join("")))
-    );
-  }
-
-  millions(num: number) {
-    let numArray = num.toString().split("");
-    let thousandssArray = numArray.slice(numArray.length - 6, numArray.length);
-    let millionsArray = numArray.slice(0, numArray.length - 6);
-    // console.log("thousandssArray", thousandssArray);
-    // console.log('millionsArray', millionsArray)
-    // if (millionsArray[0] === "0") {
-    //   return "Zero";
-    // } else 
-    if (numArray.length < 7) {
-      return this.thousands(num);
-    } else if (
-      !thousandssArray.some((num) => num !== "0")
-      // thousandssArray[thousandssArray.length - 6] === "0" &&
-      // thousandssArray[thousandssArray.length - 5] === "0" &&
-      // thousandssArray[thousandssArray.length - 4] === "0" &&
-      // thousandssArray[thousandssArray.length - 3] === "0" &&
-      // thousandssArray[thousandssArray.length - 2] === "0" &&
-      // thousandssArray[thousandssArray.length - 1] === "0"
-    ) {
-      return this.numToText(parseInt(millionsArray.join(""))) + " million";
-    } else {
-      return (
-        this.numToText(parseInt(millionsArray.join(""))) +
-        " million " +
-        this.thousands(parseInt(thousandssArray.join("")))
-      );
-    };
-  };
-
-  billions(num: number) {
-    let numArray = num.toString().split("");
-    let millionssArray = numArray.slice(numArray.length - 9, numArray.length);
-    let billionsArray = numArray.slice(0, numArray.length - 9);
-    // console.log("millionssArray", millionssArray);
-    // console.log('billionsArray', billionsArray)
-    if (numArray[0] === "0") {
-      return "Zero";
-    } else if (numArray.length < 10) {
-      return this.millions(num);
-    } else if (
-      !millionssArray.some((num) => num !== "0")
-      // millionssArray[millionssArray.length - 9] === "0" &&
-      // millionssArray[millionssArray.length - 8] === "0" &&
-      // millionssArray[millionssArray.length - 7] === "0" &&
-      // millionssArray[millionssArray.length - 6] === "0" &&
-      // millionssArray[millionssArray.length - 5] === "0" &&
-      // millionssArray[millionssArray.length - 4] === "0" &&
-      // millionssArray[millionssArray.length - 3] === "0" &&
-      // millionssArray[millionssArray.length - 2] === "0" &&
-      // millionssArray[millionssArray.length - 1] === "0"
-    ) {
-      return this.numToText(parseInt(billionsArray.join(""))) + " billion";
-    } else {
-      return (
-        this.numToText(parseInt(billionsArray.join(""))) +
-        " billion " +
-        this.millions(parseInt(millionssArray.join("")))
-      );
-    };
-  };
 
   numToText(num: number): string {
     let numArray = num.toString().split("");
@@ -685,6 +599,97 @@ class ConvertNum {
     }
     return didgits;
   }
+
+  thousands(num: number): string {
+    let numArray = num.toString().split("");
+    let hundredssArray = numArray.slice(numArray.length - 3, numArray.length);
+    let thousandsArray = numArray.slice(0, numArray.length - 3);
+    if (numArray.length < 4) {
+      return this.numToText(num);
+    } else if (!hundredssArray.some((num) => num !== "0")) {
+      return this.numToText(parseInt(thousandsArray.join(""))) + " thousand";
+    }
+    return (
+      this.numToText(parseInt(thousandsArray.join(""))) +
+      " thousand " +
+      this.numToText(parseInt(hundredssArray.join("")))
+    );
+  }
+
+  millions(num: number): string {
+    let numArray = num.toString().split("");
+    let thousandssArray = numArray.slice(numArray.length - 6, numArray.length);
+    let millionsArray = numArray.slice(0, numArray.length - 6);
+    if (numArray.length < 7) {
+      return this.thousands(num);
+    } else if (!thousandssArray.some((num) => num !== "0")) {
+      return this.numToText(parseInt(millionsArray.join(""))) + " million";
+    } else {
+      return (
+        this.numToText(parseInt(millionsArray.join(""))) +
+        " million " +
+        this.thousands(parseInt(thousandssArray.join("")))
+      );
+    }
+  }
+
+  billions(num: number): string {
+    let numArray = num.toString().split("");
+    let millionssArray = numArray.slice(numArray.length - 9, numArray.length);
+    let billionsArray = numArray.slice(0, numArray.length - 9);
+    if (numArray[0] === "0") {
+      return "Zero";
+    } else if (numArray.length < 10) {
+      return this.millions(num);
+    } else if (!millionssArray.some((num) => num !== "0")) {
+      return this.numToText(parseInt(billionsArray.join(""))) + " billion";
+    } else {
+      return (
+        this.numToText(parseInt(billionsArray.join(""))) +
+        " billion " +
+        this.millions(parseInt(millionssArray.join("")))
+      );
+    }
+  }
 }
 
 const test5 = new ConvertNum();
+
+
+class ConvertStringToNum extends Functions3 {
+  inputString: string;
+  constructor() {
+    super();
+    console.log("string 967,873",this.thousands("Nine hundred and sixty-seven thousand Eight hundred and seventy-three"))
+    console.log("string 100,000",this.thousands("One hundred thousand"))
+    console.log("string 1,000,000",this.millions("One million"))
+    console.log("string 12,345,678",this.millions("Twelve million Three hundred and fourty-five thousand Six hundred and seventy-eight"))
+    console.log("string 1,000,000,000",this.billions("One billion"))
+    console.log("string 986,045,678,901",this.billions("Nine hundred and eightty-six billion Fourty-five million Six hundred and seventy-eight thousand Nine hundred and one"))
+    console.log("string 986,045,678,901",this.billions("Nine hundred and eightty-six billion Fourty-five million Six hundred and seventy-eight thousand Nine hundred and eleven"))
+
+  }
+  thousands(inputString: string): number {
+    let stringArray = inputString.toLowerCase().split(" thousand ");
+    if(stringArray.length < 2 ) {
+      return this.textToNum(stringArray[0])*1000;
+    }
+    return this.textToNum(stringArray[0])*1000 + this.textToNum(stringArray[1]);
+  }
+  millions(inputString: string): number {
+    let stringArray = inputString.toLowerCase().split(" million ");
+    if(stringArray.length < 2 ) {
+      return this.textToNum(stringArray[0])*1000000;
+    }
+    return this.textToNum(stringArray[0])*1000000 + this.thousands(stringArray[1]);
+  }
+  billions(inputString: string): number {
+    let stringArray = inputString.toLowerCase().split(" billion ");
+    if(stringArray.length < 2 ) {
+      return this.textToNum(stringArray[0])*1000000000;
+    }
+    return this.textToNum(stringArray[0])*1000000000 + this.millions(stringArray[1]);
+  }
+}
+
+const test6 = new ConvertStringToNum();

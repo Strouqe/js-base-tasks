@@ -1,3 +1,18 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 ///1
 function dayOfWeek(num) {
     switch (num) {
@@ -213,16 +228,16 @@ console.log("test", numToText1(11));
 ///3
 var Functions3 = /** @class */ (function () {
     function Functions3() {
-        console.log("textToNum 0", this.textToNum("Zero"));
-        console.log("textToNum 235", this.textToNum("Two hundred and thirty-five"));
-        console.log("textToNum 315", this.textToNum("Three hundred and fifteen"));
-        console.log("textToNum 310", this.textToNum("Three hundred and ten"));
-        console.log("textToNum 930", this.textToNum("Nine hundred and thirty"));
-        console.log("textToNum 505", this.textToNum("Five hundred and five"));
-        console.log("textToNum 100", this.textToNum("One hundred"));
-        console.log("textToNum 9", this.textToNum("Nine"));
-        console.log("textToNum 55", this.textToNum("Fifty-five"));
-        console.log("textToNum 11", this.textToNum("Eleven"));
+        // console.log("textToNum 0", this.textToNum("Zero"));
+        // console.log("textToNum 235", this.textToNum("Two hundred and thirty-five"));
+        // console.log("textToNum 315", this.textToNum("Three hundred and fifteen"));
+        // console.log("textToNum 310", this.textToNum("Three hundred and ten"));
+        // console.log("textToNum 930", this.textToNum("Nine hundred and thirty"));
+        // console.log("textToNum 505", this.textToNum("Five hundred and five"));
+        // console.log("textToNum 100", this.textToNum("One hundred"));
+        // console.log("textToNum 9", this.textToNum("Nine"));
+        // console.log("textToNum 55", this.textToNum("Fifty-five"));
+        // console.log("textToNum 11", this.textToNum("Eleven"));
     }
     Functions3.prototype.hundreds = function (input) {
         switch (input.toLowerCase()) {
@@ -414,6 +429,7 @@ var ConvertNum = /** @class */ (function () {
         console.log("billions 12,000,678,901", this.billions(12000678901));
         console.log("billions 12,045,678,901", this.billions(12045678901));
         console.log("billions 986,045,678,901", this.billions(986045678901));
+        console.log("billions 900,000,000,000", this.billions(900000000000));
     }
     ConvertNum.prototype.hundreds = function (array) {
         switch (array[array.length - 3]) {
@@ -528,91 +544,6 @@ var ConvertNum = /** @class */ (function () {
                 return "";
         }
     };
-    ConvertNum.prototype.thousands = function (num) {
-        var numArray = num.toString().split("");
-        var hundredssArray = numArray.slice(numArray.length - 3, numArray.length);
-        var thousandsArray = numArray.slice(0, numArray.length - 3);
-        // console.log("hundredssArray", hundredssArray);
-        // if (numArray[0] === "0") {
-        //   return "Zero";
-        // } else
-        if (numArray.length < 4) {
-            return this.numToText(num);
-        }
-        else if (!hundredssArray.some(function (num) { return num !== "0"; })
-        // hundredssArray[hundredssArray.length - 3] === "0" &&
-        // hundredssArray[hundredssArray.length - 2] === "0" &&
-        // hundredssArray[hundredssArray.length - 1] === "0"
-        ) {
-            return this.numToText(parseInt(thousandsArray.join(""))) + " thousand";
-        }
-        return (this.numToText(parseInt(thousandsArray.join(""))) +
-            " thousand " +
-            this.numToText(parseInt(hundredssArray.join(""))));
-    };
-    ConvertNum.prototype.millions = function (num) {
-        var numArray = num.toString().split("");
-        var thousandssArray = numArray.slice(numArray.length - 6, numArray.length);
-        var millionsArray = numArray.slice(0, numArray.length - 6);
-        // console.log("thousandssArray", thousandssArray);
-        // console.log('millionsArray', millionsArray)
-        // if (millionsArray[0] === "0") {
-        //   return "Zero";
-        // } else 
-        if (numArray.length < 7) {
-            return this.thousands(num);
-        }
-        else if (!thousandssArray.some(function (num) { return num !== "0"; })
-        // thousandssArray[thousandssArray.length - 6] === "0" &&
-        // thousandssArray[thousandssArray.length - 5] === "0" &&
-        // thousandssArray[thousandssArray.length - 4] === "0" &&
-        // thousandssArray[thousandssArray.length - 3] === "0" &&
-        // thousandssArray[thousandssArray.length - 2] === "0" &&
-        // thousandssArray[thousandssArray.length - 1] === "0"
-        ) {
-            return this.numToText(parseInt(millionsArray.join(""))) + " million";
-        }
-        else {
-            return (this.numToText(parseInt(millionsArray.join(""))) +
-                " million " +
-                this.thousands(parseInt(thousandssArray.join(""))));
-        }
-        ;
-    };
-    ;
-    ConvertNum.prototype.billions = function (num) {
-        var numArray = num.toString().split("");
-        var millionssArray = numArray.slice(numArray.length - 9, numArray.length);
-        var billionsArray = numArray.slice(0, numArray.length - 9);
-        // console.log("millionssArray", millionssArray);
-        // console.log('billionsArray', billionsArray)
-        if (numArray[0] === "0") {
-            return "Zero";
-        }
-        else if (numArray.length < 10) {
-            return this.millions(num);
-        }
-        else if (!millionssArray.some(function (num) { return num !== "0"; })
-        // millionssArray[millionssArray.length - 9] === "0" &&
-        // millionssArray[millionssArray.length - 8] === "0" &&
-        // millionssArray[millionssArray.length - 7] === "0" &&
-        // millionssArray[millionssArray.length - 6] === "0" &&
-        // millionssArray[millionssArray.length - 5] === "0" &&
-        // millionssArray[millionssArray.length - 4] === "0" &&
-        // millionssArray[millionssArray.length - 3] === "0" &&
-        // millionssArray[millionssArray.length - 2] === "0" &&
-        // millionssArray[millionssArray.length - 1] === "0"
-        ) {
-            return this.numToText(parseInt(billionsArray.join(""))) + " billion";
-        }
-        else {
-            return (this.numToText(parseInt(billionsArray.join(""))) +
-                " billion " +
-                this.millions(parseInt(millionssArray.join(""))));
-        }
-        ;
-    };
-    ;
     ConvertNum.prototype.numToText = function (num) {
         var numArray = num.toString().split("");
         var hundreds = this.hundreds(numArray);
@@ -638,6 +569,92 @@ var ConvertNum = /** @class */ (function () {
         }
         return didgits;
     };
+    ConvertNum.prototype.thousands = function (num) {
+        var numArray = num.toString().split("");
+        var hundredssArray = numArray.slice(numArray.length - 3, numArray.length);
+        var thousandsArray = numArray.slice(0, numArray.length - 3);
+        if (numArray.length < 4) {
+            return this.numToText(num);
+        }
+        else if (!hundredssArray.some(function (num) { return num !== "0"; })) {
+            return this.numToText(parseInt(thousandsArray.join(""))) + " thousand";
+        }
+        return (this.numToText(parseInt(thousandsArray.join(""))) +
+            " thousand " +
+            this.numToText(parseInt(hundredssArray.join(""))));
+    };
+    ConvertNum.prototype.millions = function (num) {
+        var numArray = num.toString().split("");
+        var thousandssArray = numArray.slice(numArray.length - 6, numArray.length);
+        var millionsArray = numArray.slice(0, numArray.length - 6);
+        if (numArray.length < 7) {
+            return this.thousands(num);
+        }
+        else if (!thousandssArray.some(function (num) { return num !== "0"; })) {
+            return this.numToText(parseInt(millionsArray.join(""))) + " million";
+        }
+        else {
+            return (this.numToText(parseInt(millionsArray.join(""))) +
+                " million " +
+                this.thousands(parseInt(thousandssArray.join(""))));
+        }
+    };
+    ConvertNum.prototype.billions = function (num) {
+        var numArray = num.toString().split("");
+        var millionssArray = numArray.slice(numArray.length - 9, numArray.length);
+        var billionsArray = numArray.slice(0, numArray.length - 9);
+        if (numArray[0] === "0") {
+            return "Zero";
+        }
+        else if (numArray.length < 10) {
+            return this.millions(num);
+        }
+        else if (!millionssArray.some(function (num) { return num !== "0"; })) {
+            return this.numToText(parseInt(billionsArray.join(""))) + " billion";
+        }
+        else {
+            return (this.numToText(parseInt(billionsArray.join(""))) +
+                " billion " +
+                this.millions(parseInt(millionssArray.join(""))));
+        }
+    };
     return ConvertNum;
 }());
 var test5 = new ConvertNum();
+var ConvertStringToNum = /** @class */ (function (_super) {
+    __extends(ConvertStringToNum, _super);
+    function ConvertStringToNum() {
+        var _this = _super.call(this) || this;
+        console.log("string 967,873", _this.thousands("Nine hundred and sixty-seven thousand Eight hundred and seventy-three"));
+        console.log("string 100,000", _this.thousands("One hundred thousand"));
+        console.log("string 1,000,000", _this.millions("One million"));
+        console.log("string 12,345,678", _this.millions("Twelve million Three hundred and fourty-five thousand Six hundred and seventy-eight"));
+        console.log("string 1,000,000,000", _this.billions("One billion"));
+        console.log("string 986,045,678,901", _this.billions("Nine hundred and eightty-six billion Fourty-five million Six hundred and seventy-eight thousand Nine hundred and one"));
+        console.log("string 986,045,678,901", _this.billions("Nine hundred and eightty-six billion Fourty-five million Six hundred and seventy-eight thousand Nine hundred and eleven"));
+        return _this;
+    }
+    ConvertStringToNum.prototype.thousands = function (inputString) {
+        var stringArray = inputString.toLowerCase().split(" thousand ");
+        if (stringArray.length < 2) {
+            return this.textToNum(stringArray[0]) * 1000;
+        }
+        return this.textToNum(stringArray[0]) * 1000 + this.textToNum(stringArray[1]);
+    };
+    ConvertStringToNum.prototype.millions = function (inputString) {
+        var stringArray = inputString.toLowerCase().split(" million ");
+        if (stringArray.length < 2) {
+            return this.textToNum(stringArray[0]) * 1000000;
+        }
+        return this.textToNum(stringArray[0]) * 1000000 + this.thousands(stringArray[1]);
+    };
+    ConvertStringToNum.prototype.billions = function (inputString) {
+        var stringArray = inputString.toLowerCase().split(" billion ");
+        if (stringArray.length < 2) {
+            return this.textToNum(stringArray[0]) * 1000000000;
+        }
+        return this.textToNum(stringArray[0]) * 1000000000 + this.millions(stringArray[1]);
+    };
+    return ConvertStringToNum;
+}(Functions3));
+var test6 = new ConvertStringToNum();
